@@ -1,0 +1,36 @@
+What is the CPU type and model?
+    Intel(R) Xeon(R) CPU E5-2680 0 @ 2.70GHz
+
+How many processors on this system?
+    4 processors
+
+What version of the Linux kernel is being used?
+    Linux version 3.10.0-514.2.2.el7.x86_64 #1 SMP Wed Nov 16 13:15:13 EST 2016
+
+How long has it been since the system was last booted?
+    up 1 day, 17:57
+
+How much of the total CPU time available (across all processors) has been spent executing in User mode? System mode? Idle?
+    USER: 713.27 seconds
+    SYSTEM: 316.58 seconds
+    IDLE: 602797.91 seconds
+
+How much memory is on the machine?
+    MemTotal:        5929936 kB
+
+How much memory is currently available?
+    MemFree:         4979468 kB
+
+How many kBytes have been read from the hard disk (sda), and how many kBytes have been written to the hard disk, since the last system reboot?
+    Read: 751586 kB
+    Written: 175417 kB
+
+How many processes have been created since the last reboot?
+    Processes created: 54499
+
+How many context switches have been performed since the last reboot?
+    Context switches: 13448002
+
+What is the current load average for the last 1, 5 and 15 minutes?
+    Load average: 0.05, 0.04, 0.05
+

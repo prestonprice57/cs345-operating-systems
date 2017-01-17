@@ -1,20 +1,26 @@
 /***********************************************************************
 * Program:
-*    Lab 00, Practice Lab Submission
+*    Lab 00T2, Practice Lab Submission
 *    Brother Jones, CS345
 * Author:
 *    Preston Price
 * Summary: 
 *    Count number of integers entered by users.
+************************************************************************
+************************************************************************
+*
+* Changes made to my code for the re-submission:
+*     - Just did everything in main since the program is small.
+*
 ************************************************************************/
-
+   
 #include <iostream>
 using namespace std;
 
 /**********************************************************************
- * Counts how many integers a user enters before they enter 0.
+ * Calls countIntegers() and outputs how many integers were entered. 
  ***********************************************************************/
-int countIntegers()
+int main()
 {
    int input = -1;
    int count = -1;
@@ -25,17 +31,7 @@ int countIntegers()
       cout << "Enter an integer: ";
       cin >> input;
    }
-
-   return count;
-}
-
-/**********************************************************************
- * Calls countIntegers() and outputs how many integers were entered. 
- ***********************************************************************/
-int main()
-{
-   int count = countIntegers();
-
+   
    if (count == 0)
    {
       cout << "No non-zero integers were entered.\n";
