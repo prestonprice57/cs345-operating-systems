@@ -1,15 +1,26 @@
-#!/bin/bash
+#!/bin/bash                                                                                          
 
-# Lab LinuxInfo
+############################################################################
+# Lab LinuxInfoT2
 # Brother Jones, CS 345, Operating Systems
 # Preston Price
+############################################################################
 
-############################################################################
-#
-# Summary:
-#    Different scripts to view components on Linux system.
-#
-############################################################################
+############################################################################                         
+#                                                                                                    
+# Changes made to my code for the re-submission:                                                     
+#   (examples:)
+#   - I edited the output for how long since the system has been booted.
+#                                                                                                    
+#                                                                                                    
+############################################################################                        
+#                                                                                                     
+############################################################################                         
+# Summary:                                                                                           
+#    Outputs information about the current system
+#                                                                                                    
+#                                                                                                     
+############################################################################  
 
 # Get CPU type and model from /proc/cpuinfo
 echo "What is the CPU type and model?"
@@ -27,7 +38,7 @@ echo -e "    "$(uname -s) version $(uname -r) $(uname -v)"\n"
 
 # See how long since the last system reboot using uptime
 echo "How long has it been since the system was last booted?"
-output=$(uptime | cut -c 11-25)
+output=$(uptime | cut -c 11-26)
 echo -e "    "$output"\n" | sed 's/,/, /g'
 
 # View stats on CPU time in /proc/stat
