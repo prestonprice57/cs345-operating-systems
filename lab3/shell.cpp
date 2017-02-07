@@ -1,3 +1,15 @@
+/***********************************************************************
+* Program:
+*    Lab UnixShell  
+*    Brother Jones, CS 345
+* Author:
+*    Preston Price
+* Summary:
+*    This project creates a Unix Shell that has a history function
+*    and is able to make system calls. It also handles running processes
+*    in the background.
+************************************************************************/
+
 #include <stdio.h>
 #include <unistd.h>
 #include <stdlib.h>
