@@ -1,6 +1,6 @@
 /***********************************************************************
 * Program:
-*    Lab UnixShell  
+*    Lab UnixShellT2  
 *    Brother Jones, CS 345
 * Author:
 *    Preston Price
@@ -9,6 +9,16 @@
 *    and is able to make system calls. It also handles running processes
 *    in the background.
 ************************************************************************/
+/*****************************************************************************
+ *
+ * Changes made to my code for the re-submission:
+ *   (examples:)
+ *   - Changed history to remove extra spaces
+ *   - Handled case where you press enter and nothing
+ *     should output (command not found was output previously).
+ *
+ *****************************************************************************/
+
 
 #include <stdio.h>
 #include <unistd.h>
@@ -113,7 +123,7 @@ void displayHistory( )
    
    for (int i = start; i < goodStringCount; ++i)
    {            
-      cout << " " << setw(3) << i << "  " << commands[i % HIST_SIZE] << endl;
+      cout << " " << setw(3) << i << "  " << commands[i % HIST_SIZE];
    }
    
    return;
@@ -271,11 +281,12 @@ int main(void)
          fprintf(stderr, "Fork Failed");
          return 1;
       }
-      else if (pid == 0)
+      else if (pid == 0 && inputBuffer[0])
       {
          /* child process */
          int fail = execvp(inputBuffer, args);
          if (fail < 0) {
+            cout << int(inputBuffer[0]) << endl;
             printf("command not found\n");
             _exit(0);
          }
