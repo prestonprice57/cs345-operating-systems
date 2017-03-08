@@ -36,26 +36,20 @@
 void FIFO::execute()
 {
    int first = 0; // Keeps track of which item was first
-   int fill = 0; // Used to fill all frames
-   int page = myPageFactory->getPage();
+   int page = myPageFactory->getPage(); // get first page
 
    while (page != -1) {
-      int pageFound = hit(page);
+      int pageFound = hit(page); // check to see if the page is in memory
 
+      // if the page is not found replace the first page with the new page,
+      // note that if there is an empty frame the page will be placed there
       if (pageFound == -1) {
-         if (fill != NUM_FRAMES) {
-            frames[fill] = page;
-            fill++;
-         } else {
-            frames[first] = page;
-            first = (first + 1) % NUM_FRAMES;
-         }
-         display(page, frames, true);
-      } else {
-         display(page, frames, false);
+         frames[first] = page;
+         first = (first + 1) % NUM_FRAMES;
       }
       
-      page = myPageFactory->getPage();
+      display(page, frames, pageFound == -1); // display frame
+      page = myPageFactory->getPage(); // get next page
    }
 }
 

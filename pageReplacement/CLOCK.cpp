@@ -55,35 +55,33 @@ void CLOCK::execute()
    bool clock[NUM_FRAMES]; // keep track of clock bits
    int reference = 0; // keep track of the pointer to the clock
    
-   int fill = 0; // Used to fill all frames
-   int page = myPageFactory->getPage();
+   int page = myPageFactory->getPage(); // get the first page
 
+   // initialize the clock array to all 0s
+   for (int i = 0; i < NUM_FRAMES; ++i)
+      clock[i] = 0;
+   
    while (page != -1) {
       int pageFound = hit(page);
 
+      // -1 means the page is not found
       if (pageFound == -1) {
-         if (fill != NUM_FRAMES) {
-            frames[fill] = page;
-            clock[fill] = 1;
-            
-            fill++;
-            reference = (reference + 1) % NUM_FRAMES;
-         } else {
-            while (clock[reference]) {
-               clock[reference] = 0;
-               reference = (reference + 1) % NUM_FRAMES;
-            }
-            frames[reference] = page;
-            clock[reference] = 1;
-            
+         // search for a page that has the clock bit set to 0
+         while (clock[reference]) {
+            clock[reference] = 0;
             reference = (reference + 1) % NUM_FRAMES;
          }
-         display(page, frames, true);
+         // update the frames array and clock array
+         frames[reference] = page;
+         clock[reference] = 1;
+
+         // increment the reference
+         reference = (reference + 1) % NUM_FRAMES;
       } else {
-         clock[pageFound] = 1;
-         display(page, frames, false);
+         clock[pageFound] = 1; // set clock to one if page is found
       }
 
-      page = myPageFactory->getPage();
+      display(page, frames, pageFound == -1);  // display the frame
+      page = myPageFactory->getPage(); // get the next page
    }
 }

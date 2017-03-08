@@ -3,13 +3,13 @@
 *    Lab PageReplacement
 *    Brother Jones, CS 345
 * Author:
-*    Your Name
+*    Preston Price
 * Summary:
-*    Descriptive text ...
+*    Implementation of LRU page replacement algorithm.
 ************************************************************************/
 
 #include "vmalgorithm.h"
-#include <queue>
+#include <vector>
 #include <algorithm>
 
 /**************************************************************************
@@ -37,35 +37,36 @@
 void LRU::execute()
 {
    vector<int> recentQ; // stores numbers from least to most recently used
-   int front;
    int fill = 0; // Used to fill all frames
-   int page = myPageFactory->getPage();
+   int page = myPageFactory->getPage(); // get first page
 
    while (page != -1) {
-      int pageFound = hit(page);
+      int pageFound = hit(page); // check to see if the page is in memory
 
       if (pageFound == -1) {
+         // if there is an empty frame put the page there
          if (fill != NUM_FRAMES) {
             frames[fill] = page;
             recentQ.push_back(fill);
             fill++;
          } else {
-            front = recentQ[0];
-            frames[front] = page;
-            recentQ.erase(recentQ.begin());
-            recentQ.push_back(front);
+            int front = recentQ[0]; // get the least frequently used item
+            frames[front] = page; // set the front item of frame to the page
+            recentQ.erase(recentQ.begin()); // erase the first item of queue
+            recentQ.push_back(front); // append item to the end of queue
          }
-         display(page, frames, true);
       } else {
+         // find where page is on recent queue
          vector<int>::iterator it;
          it = std::find(recentQ.begin(), recentQ.end(), pageFound);
 
+         // erase page where it is and append it to back of queue
          recentQ.erase(it);
          recentQ.push_back(pageFound);
-         display(page, frames, false);
       }
-
-      page = myPageFactory->getPage();
+      
+      display(page, frames, pageFound == -1); // display frame
+      page = myPageFactory->getPage(); // get next page
    }
 }
 
