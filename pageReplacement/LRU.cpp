@@ -9,7 +9,7 @@
 ************************************************************************/
 
 #include "vmalgorithm.h"
-#include <vector>
+#include <list>
 #include <algorithm>
 
 /**************************************************************************
@@ -36,7 +36,7 @@
  *************************************************************************/ 
 void LRU::execute()
 {
-   vector<int> recentQ; // stores numbers from least to most recently used
+   list<int> recentQ; // stores numbers from least to most recently used
    int fill = 0; // Used to fill all frames
    int page = myPageFactory->getPage(); // get first page
 
@@ -50,18 +50,14 @@ void LRU::execute()
             recentQ.push_back(fill);
             fill++;
          } else {
-            int front = recentQ[0]; // get the least frequently used item
+            int front = recentQ.front(); // get the least frequently used item
             frames[front] = page; // set the front item of frame to the page
             recentQ.erase(recentQ.begin()); // erase the first item of queue
             recentQ.push_back(front); // append item to the end of queue
          }
       } else {
-         // find where page is on recent queue
-         vector<int>::iterator it;
-         it = std::find(recentQ.begin(), recentQ.end(), pageFound);
-
          // erase page where it is and append it to back of queue
-         recentQ.erase(it);
+         recentQ.remove(pageFound);
          recentQ.push_back(pageFound);
       }
       
